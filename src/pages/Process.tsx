@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Footer } from "@/components/Footer";
 import { AnimatedProgress } from "@/components/AnimatedProgress";
 import { motion } from "framer-motion";
@@ -6,63 +5,78 @@ import { StaggerChildren, StaggerItem } from "@/components/StaggerChildren";
 
 const phases = [
   {
-    phase: "Phase 01",
+    number: "01",
     percent: 25,
     title: "Discovery",
-    description: "We dive deep into your vision, goals, and audience. Through research and strategic planning, we define the project scope, create wireframes, and establish the creative direction.",
+    description: "We dive deep into your vision, goals, and audience. Through research and strategic planning, we define the project scope and creative direction.",
+    deliverables: ["Brand Audit", "Wireframes", "Project Scope"],
   },
   {
-    phase: "Phase 02",
+    number: "02",
     percent: 75,
     title: "Development",
-    description: "Where concepts become reality. Our engineers build your product with clean code, modern frameworks, and meticulous attention to detail — ensuring performance at every step.",
+    description: "Where concepts become reality. Our engineers build your product with clean code, modern frameworks, and meticulous attention to detail.",
+    deliverables: ["Frontend", "Backend", "Integrations"],
   },
   {
-    phase: "Phase 03",
+    number: "03",
     percent: 100,
     title: "Deployment",
-    description: "We rigorously test, optimize, and launch your product. Post-launch, we monitor performance and provide support to ensure everything runs flawlessly.",
+    description: "We rigorously test, optimize, and launch your product. Post-launch, we monitor performance and provide ongoing support.",
+    deliverables: ["QA Testing", "Launch", "Monitoring"],
   },
 ];
 
 export default function ProcessPage() {
   return (
     <main className="min-h-screen px-6 pb-28">
-      <div className="max-w-5xl mx-auto pt-32">
+      <div className="max-w-6xl mx-auto pt-28 md:pt-40">
         <motion.div
-          className="text-center mb-20"
+          className="mb-24 md:mb-32"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Badge className="mb-6 bg-primary/15 text-primary border-primary/30 hover:bg-primary/20">
-            How We Work
-          </Badge>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">The Playbook.</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A structured, transparent workflow designed to deliver exceptional results on time and within scope.
+          <div className="flex items-center gap-3 mb-8">
+            <div className="section-line" />
+            <span className="text-xs font-body uppercase tracking-[0.3em] text-muted-foreground">How We Work</span>
+          </div>
+          <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tight mb-6">
+            The<br />
+            <span className="text-gradient italic">playbook.</span>
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-lg font-body leading-relaxed">
+            A structured, transparent workflow designed to deliver exceptional results — on time and within scope.
           </p>
         </motion.div>
 
-        <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <StaggerChildren className="space-y-px border border-border/40 rounded-xl overflow-hidden">
           {phases.map((p) => (
-            <StaggerItem key={p.phase}>
-              <div className="glass-card p-8 hover:border-primary/30 transition-colors duration-300 h-full">
-                <div className="flex items-center justify-between mb-4">
-                  <Badge variant="secondary" className="bg-primary/15 text-primary border-0 text-xs tracking-wider">
-                    {p.phase}
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">{p.percent}%</span>
+            <StaggerItem key={p.number}>
+              <div className="bg-card/60 p-10 md:p-14 group hover:bg-card transition-colors duration-500">
+                <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
+                  <div className="md:w-48 shrink-0">
+                    <span className="text-5xl md:text-6xl font-display font-bold text-gradient">{p.number}</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl md:text-3xl font-display font-semibold mb-2">{p.title}</h3>
+                    <AnimatedProgress value={p.percent} className="mb-5 max-w-xs" />
+                    <p className="text-muted-foreground text-sm leading-relaxed font-body mb-6">{p.description}</p>
+                    <div className="flex flex-wrap gap-3">
+                      {p.deliverables.map((d) => (
+                        <span key={d} className="text-[10px] uppercase tracking-[0.2em] text-primary/70 border border-primary/20 rounded-full px-3 py-1 font-body">
+                          {d}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <AnimatedProgress value={p.percent} className="mb-5" />
-                <h3 className="text-xl font-semibold mb-3">{p.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{p.description}</p>
               </div>
             </StaggerItem>
           ))}
         </StaggerChildren>
       </div>
-      <div className="max-w-5xl mx-auto mt-24">
+      <div className="max-w-6xl mx-auto mt-24">
         <Footer />
       </div>
     </main>
