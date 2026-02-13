@@ -13,13 +13,13 @@ const phases = [
   },
   {
     phase: "Phase 02",
-    percent: 50,
+    percent: 75,
     title: "Development",
     description: "Where concepts become reality. Our engineers build your product with clean code, modern frameworks, and meticulous attention to detail — ensuring performance at every step.",
   },
   {
     phase: "Phase 03",
-    percent: 25,
+    percent: 100,
     title: "Deployment",
     description: "We rigorously test, optimize, and launch your product. Post-launch, we monitor performance and provide support to ensure everything runs flawlessly.",
   },
