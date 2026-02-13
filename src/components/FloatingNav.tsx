@@ -7,6 +7,7 @@ const links = [
   { to: "/work", label: "Work" },
   { to: "/process", label: "Process" },
   { to: "/about", label: "About" },
+  { to: "/lab", label: "Lab" },
 ];
 
 export function FloatingNav() {

@@ -13,6 +13,7 @@ import Work from "./pages/Work";
 import ProcessPage from "./pages/Process";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Lab from "./pages/Lab";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ function AnimatedRoutes() {
           <Route path="/work" element={<Work />} />
           <Route path="/process" element={<ProcessPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/lab" element={<Lab />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
