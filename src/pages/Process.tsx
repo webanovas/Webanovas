@@ -1,6 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Footer } from "@/components/Footer";
-import { Progress } from "@/components/ui/progress";
+import { AnimatedProgress } from "@/components/AnimatedProgress";
+import { motion } from "framer-motion";
+import { StaggerChildren, StaggerItem } from "@/components/StaggerChildren";
 
 const phases = [
   {
@@ -27,7 +29,12 @@ export default function ProcessPage() {
   return (
     <main className="min-h-screen px-6 pb-28">
       <div className="max-w-5xl mx-auto pt-32">
-        <div className="text-center mb-20">
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <Badge className="mb-6 bg-primary/15 text-primary border-primary/30 hover:bg-primary/20">
             How We Work
           </Badge>
@@ -35,23 +42,25 @@ export default function ProcessPage() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A structured, transparent workflow designed to deliver exceptional results on time and within scope.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {phases.map((p) => (
-            <div key={p.phase} className="glass-card p-8 hover:border-primary/30 transition-colors duration-300">
-              <div className="flex items-center justify-between mb-4">
-                <Badge variant="secondary" className="bg-primary/15 text-primary border-0 text-xs tracking-wider">
-                  {p.phase}
-                </Badge>
-                <span className="text-xs text-muted-foreground">{p.percent}%</span>
+            <StaggerItem key={p.phase}>
+              <div className="glass-card p-8 hover:border-primary/30 transition-colors duration-300 h-full">
+                <div className="flex items-center justify-between mb-4">
+                  <Badge variant="secondary" className="bg-primary/15 text-primary border-0 text-xs tracking-wider">
+                    {p.phase}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">{p.percent}%</span>
+                </div>
+                <AnimatedProgress value={p.percent} className="mb-5" />
+                <h3 className="text-xl font-semibold mb-3">{p.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{p.description}</p>
               </div>
-              <Progress value={p.percent} className="mb-5 h-1.5 bg-secondary" />
-              <h3 className="text-xl font-semibold mb-3">{p.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{p.description}</p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
       <div className="max-w-5xl mx-auto mt-24">
         <Footer />

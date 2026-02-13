@@ -2,6 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Zap, Palette, Server, Target } from "lucide-react";
+import { motion } from "framer-motion";
+import { StaggerChildren, StaggerItem } from "@/components/StaggerChildren";
 
 const features = [
   {
@@ -35,7 +37,12 @@ const Index = () => {
     <main className="min-h-screen px-6 pb-28">
       <div className="max-w-5xl mx-auto pt-32">
         {/* Hero */}
-        <div className="text-center mb-24">
+        <motion.div
+          className="text-center mb-24"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <Badge className="mb-6 bg-primary/15 text-primary border-primary/30 hover:bg-primary/20">
             Available for 2026
           </Badge>
@@ -50,20 +57,22 @@ const Index = () => {
           <Button asChild size="lg" className="rounded-full px-8">
             <Link to="/work">View Selection</Link>
           </Button>
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {features.map((f) => (
-            <div key={f.badge} className="glass-card p-8 group hover:border-primary/30 transition-colors duration-300">
-              <Badge variant="secondary" className="mb-4 bg-primary/15 text-primary border-0 text-xs tracking-wider">
-                {f.badge}
-              </Badge>
-              <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
-            </div>
+            <StaggerItem key={f.badge}>
+              <div className="glass-card p-8 group hover:border-primary/30 transition-colors duration-300 h-full">
+                <Badge variant="secondary" className="mb-4 bg-primary/15 text-primary border-0 text-xs tracking-wider">
+                  {f.badge}
+                </Badge>
+                <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </main>
   );
