@@ -131,7 +131,7 @@ export default function Quiz() {
             <span className="text-gradient italic">perfect fit.</span>
           </h1>
           <p className="text-muted-foreground font-body leading-relaxed">
-            Answer 3 quick questions and we'll suggest the right package for your project.
+            Answer a few quick questions and we'll suggest the right package for your project.
           </p>
         </motion.div>
 
@@ -141,10 +141,9 @@ export default function Quiz() {
             {questions.map((_, i) => (
               <div key={i} className="flex-1 h-1 rounded-full overflow-hidden bg-secondary/50">
                 <motion.div
-                  className="h-full bg-primary"
-                  initial={{ width: "0%" }}
-                  animate={{ width: i < currentQ ? "100%" : i === currentQ ? "50%" : "0%" }}
-                  transition={{ duration: 0.4 }}
+                  className="h-full bg-primary rounded-full"
+                  animate={{ width: i < currentQ ? "100%" : "0%" }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
                 />
               </div>
             ))}
@@ -253,7 +252,7 @@ export default function Quiz() {
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button asChild size="lg" className="rounded-full px-8 gap-2 group font-body">
-                    <Link to="/contact">
+                    <Link to={`/contact?package=${encodeURIComponent(result.label)}&price=${encodeURIComponent(result.price)}`}>
                       <MessageCircle className="w-4 h-4" />
                       Let's Talk
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
