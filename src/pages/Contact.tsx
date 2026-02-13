@@ -5,8 +5,12 @@ import { Label } from "@/components/ui/label";
 import { Footer } from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useSearchParams } from "react-router-dom";
 
 export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const quizPackage = searchParams.get("package");
+  const quizPrice = searchParams.get("price");
   return (
     <main className="min-h-screen px-6 pb-28">
       <div className="max-w-2xl mx-auto pt-28 md:pt-40">
@@ -36,9 +40,23 @@ export default function Contact() {
           transition={{ delay: 0.3, duration: 0.6 }}
           onSubmit={(e) => {
             e.preventDefault();
-            window.location.href = "mailto:hello@webanovas.com";
+            const form = e.target as HTMLFormElement;
+            const name = (form.elements.namedItem("name") as HTMLInputElement)?.value || "";
+            const email = (form.elements.namedItem("email") as HTMLInputElement)?.value || "";
+            const message = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value || "";
+            const packageInfo = quizPackage ? `\n\nQuiz Result: ${quizPackage} (${quizPrice})` : "";
+            const subject = quizPackage ? `Project Inquiry — ${quizPackage}` : "New Project Inquiry";
+            const body = `Name: ${name}\nEmail: ${email}\n\n${message}${packageInfo}`;
+            window.location.href = `mailto:webanovas.contact@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
           }}
         >
+          {quizPackage && (
+            <div className="mb-6 p-4 rounded-xl border border-primary/30 bg-primary/5">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-primary font-body block mb-1">Your Quiz Result</span>
+              <span className="font-display font-semibold text-foreground">{quizPackage}</span>
+              <span className="text-gradient font-display font-bold ml-2">{quizPrice}</span>
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-xs uppercase tracking-[0.15em] font-body">Name</Label>
