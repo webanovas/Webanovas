@@ -129,16 +129,24 @@ export default function Pricing() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
-          <h3 className="text-2xl md:text-3xl font-display font-semibold mb-4">Need something custom?</h3>
+          <h3 className="text-2xl md:text-3xl font-display font-semibold mb-4">Not sure which package?</h3>
           <p className="text-muted-foreground font-body mb-6 max-w-md mx-auto">
-            Every project is different. Let's discuss your vision and we'll craft a proposal that fits your exact needs and budget.
+            Take our 30-second quiz to find the perfect fit for your project — or reach out directly for a custom quote.
           </p>
-          <Button asChild size="lg" className="rounded-full px-8 gap-2 group">
-            <Link to="/contact">
-              Let's Talk
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button asChild size="lg" className="rounded-full px-8 gap-2 group">
+              <Link to="/quiz">
+                Take the Quiz
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="rounded-full px-8 gap-2 group">
+              <Link to="/contact">
+                Contact Us
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
         </motion.div>
       </div>
       <div className="max-w-6xl mx-auto mt-24">
