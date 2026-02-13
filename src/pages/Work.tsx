@@ -2,6 +2,9 @@ import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { StaggerChildren, StaggerItem } from "@/components/StaggerChildren";
 import { ArrowUpRight } from "lucide-react";
+import vanguardImg from "@/assets/work-vanguard.jpg";
+import nexusImg from "@/assets/work-nexus.jpg";
+import artistImg from "@/assets/work-artist.jpg";
 
 const projects = [
   {
@@ -9,21 +12,21 @@ const projects = [
     title: "Vanguard Estates",
     description: "A premium property showcase platform with immersive visuals, smooth animations, and an elegant browsing experience.",
     year: "2025",
-    color: "from-amber-900/20 to-stone-900/40",
+    image: vanguardImg,
   },
   {
     category: "AI / SAAS",
     title: "Nexus AI",
     description: "An intelligent SaaS dashboard featuring real-time analytics, AI-powered insights, and a sleek modern interface.",
     year: "2025",
-    color: "from-blue-900/20 to-slate-900/40",
+    image: nexusImg,
   },
   {
     category: "CREATIVE",
     title: "The Artist Loft",
     description: "A bold creative portfolio with dynamic layouts, rich media galleries, and an expressive artistic design.",
     year: "2024",
-    color: "from-rose-900/20 to-stone-900/40",
+    image: artistImg,
   },
 ];
 
@@ -51,12 +54,13 @@ export default function Work() {
           {projects.map((p, i) => (
             <StaggerItem key={p.title}>
               <div className="glass-card overflow-hidden group cursor-pointer">
-                <div className={`h-56 md:h-72 bg-gradient-to-br ${p.color} flex items-end p-8 md:p-12 relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.08),transparent_60%)]" />
+                <div className="h-56 md:h-72 relative overflow-hidden">
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
                   <span className="text-[120px] md:text-[200px] font-display font-bold absolute -right-4 -bottom-12 text-foreground/[0.03] leading-none select-none">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div className="relative z-10">
+                  <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-10">
                     <span className="text-[10px] uppercase tracking-[0.3em] text-primary font-body">{p.category}</span>
                   </div>
                   <div className="absolute top-8 right-8 md:top-12 md:right-12 w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:border-primary group-hover:bg-primary/10">
